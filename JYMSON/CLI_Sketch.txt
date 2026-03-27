@@ -47,3 +47,96 @@
 
     };
 ?>
+
+==============================================================================================================================
+<?php 
+    //accessing the json file
+    $file = __DIR__ . "/data_users.json"; 
+    
+    function file_does_not_exist($file, $new_data){
+        if(!file_exists($file) || filesize($file) == 0){
+            //if the file doesn't exist, we will create a new file with an empty array
+            $first_record = array($new_data);
+            $data_to_save = $first_record;
+            $encoded_data = json_encode($data_to_save, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            file_put_contents($file, $encoded_data, LOCK_EX);
+            return "true";
+        }else{
+            return "false";
+        }
+    }
+
+    function saveUser($name, $email, $password){
+        //defining the new user in a array
+        $new_user = array(
+            "name" => $name,
+            "email" => $email,
+            "password" => $password
+        );
+
+        //checking if the file is empty or doesn't exist, if it is empty we will create a new array with the new user as the first record, if it is not empty we will decode the existing data and add a new user to the existing data
+        if(file_does_not_exist($file, $new_user) == "false"){
+            //if the file already exists, we will check if the user already exists in the file
+            if(search_user_by_email($email) == "success"){
+                return "error";
+            }else{
+                //if the file is not empty, we decode the existing data and add a new user to the existing data
+                $old_records = json_decode(file_get_contents($file));
+                //we add the new user to the existing data
+                array_push($old_records, $new_user);
+                $data_to_save = $old_records;
+            }
+        }
+        
+        //saving the data to the file
+        $encoded_data = json_encode($data_to_save, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+        //we will verify if the data is saved successfully or not
+        //About LOCK_EX: This prevents other processes from reading or writing to the file simultaneously, ensuring data integrity in concurrent scenarios.
+        if(!file_put_contents($file, $encoded_data, LOCK_EX)){
+            return "error";
+        }else{
+            return "success";
+        }
+
+    }
+
+    function search_user($name, $email, $password){
+        //defining teh user to search in json file
+        $user = array(
+            "name" => $name,
+            "email" => $email,
+            "password" => $password
+        );
+
+        //checking if the file is empty or doesn't exist
+        if(!file_exists($file) || filesize($file) == 0){
+            return "error";
+        }else{
+            $old_records = json_decode(file_get_contentes($file));
+
+            //we will search for the user in the existing data
+            foreach($old_records as $record){
+                if($record["name"] == $user["name"] && $record["email"] == $user["email"] && $record["password"] == $user["password"]){
+                    return "success";
+                }
+            };
+        }
+        return "error";
+    }
+
+    function search_user_by_email($email){
+        //checking if the file is empty or doesn't exist
+        if(!$file_exists($file) || filesize($file) == 0){
+            return "error";
+        }else{
+            //we will search for the user in the existing data
+            $old_records = json_decode(file_get_contents($file));
+            foreach($old_records as $record){
+                if($record["email"] = $email){
+                    return "success";
+                }
+            }
+        }
+    }
+?>
