@@ -1,7 +1,7 @@
 <?php 
     function saveUser($name, $email, $password){
         //accessing the json file
-        $file = __DIR__ . "/messages.json";
+        $file = __DIR__ . "/data_users.json";
         
         //defining the new user in a array
         $new_user = array(
@@ -37,6 +37,28 @@
     }
 
     function search_user($name, $email, $password){
-        
+        //acccessing the json file
+        $file = __DIR__ . "/data_users.json";
+
+        //defining teh user to search in json file
+        $user = array(
+            "name" => $name,
+            "email" => $email,
+            "password" => $password
+        );
+
+        //checking if the file is empty or doesn't exist
+        if(!file_exists($fie) || filesize($file) == 0){
+            return "error";
+        }else{
+            $old_records = json_decode(file_get_contentes($file));
+
+            //we will search for the user in the existing data
+            foreach($old_records as $record){
+                if($record["name"] == $user["name"] && $record["email"] == $user["email"] && $record["password"] == $user["password"]){
+                    return "success";
+                }
+            };
+        }
     }
 ?>
