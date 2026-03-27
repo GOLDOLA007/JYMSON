@@ -1,0 +1,49 @@
+<?php 
+    function login_page(){
+        do{
+            echo "===================LOGIN===================\n";
+
+            echo "Name: ";
+            $name = readline();
+
+            echo "Email: ";
+            $email = readline();
+
+            echo "Password: ";
+            $password = readline();
+
+            echo "Press T to confirm or F to cancel\n";
+            $create_account = readline();
+
+            if($create_account === 'T'){
+                //save_user($name, $email, $password);
+            }else{
+                $create_account = 'F';
+            }
+        }while($create_account != 'F');        
+
+    };
+
+    function save_user($name, $email, $password){
+        
+    }
+
+    function _init_(){
+        $user_choice = "";
+        do{
+                echo "===================WELCOME===================\n";
+                echo "Press:\nL -> Login\nC -> Create an Account\n0 -> Exit\n";
+                $user_choice = readline();
+
+                switch ($user_choice){
+                    case 'L':
+                        login_page();
+                    case 'C':
+                        //createAnAccount_page();
+            }
+            }while($user_choice != 0);
+
+            echo "Bye Bye!";
+
+    };
+?>
