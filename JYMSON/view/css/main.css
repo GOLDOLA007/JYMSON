@@ -1,0 +1,417 @@
+:root {
+    color-scheme: dark;
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel-strong: #1f2937;
+    --surface: #0f172a;
+    --surface-strong: #111827;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #7c3aed;
+    --accent-soft: rgba(124, 58, 237, 0.12);
+    --error: #ef4444;
+    --success: #22c55e;
+    --border: rgba(148, 163, 184, 0.16);
+    --shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, rgba(124, 58, 237, 0.18), transparent 30%),
+               linear-gradient(180deg, #050810 0%, var(--bg) 100%);
+    color: var(--text);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    min-height: 100vh
+}
+
+form {
+    width: 100%;
+    background: rgba(18, 24, 38, 0.85); /* mais glass */
+    border: 1px solid rgba(148, 163, 184, 0.08);
+    border-radius: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    padding: 2rem;
+    backdrop-filter: blur(22px); /* mais forte */
+}
+
+h3 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #f8fafc;
+}
+
+input:focus {
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+}
+
+input[type='email'],
+input[type='password'],
+input[type='text'] {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 16px;
+    padding: 0.95rem 1rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+    font-size: 1rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+input[type='email']:focus,
+input[type='password']:focus,
+input[type='text']:focus {
+    outline: none;
+    border-color: rgba(124, 58, 237, 0.7);
+    transform: translateY(-1px);
+}
+
+input[type='submit'] {
+    width: 100%;
+    border: none;
+    border-radius: 16px;
+    padding: 1rem 1.1rem;
+    background: linear-gradient(135deg, #7c3aed 0%, #60a5fa 100%);
+    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.25);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+input[type='button'] {
+    width: auto; /* natural size */
+    min-width: 44px; /* good UX target */
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 14px;
+
+    padding: 0 0.9rem;
+    margin-bottom: 10px;
+
+    background: rgba(15, 23, 42, 0.8); /* matches your inputs */
+    color: var(--text);
+
+    font-weight: 600;
+    font-size: 0.95rem;
+
+    cursor: pointer;
+
+    transition: 
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+.password_group {
+    position: relative;
+    display: block;
+}
+
+.password_group input {
+    width: 100%;
+    padding-right: 3.5rem; /* room for the toggle button */
+}
+
+.password-toggle {
+    position: absolute;
+    top: 45%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    transition: color 0.2s ease, transform 0.5s ease;
+}
+
+.password-toggle:hover {
+    color: var(--accent);
+     transform: translateY(-50%) scale(1.1);
+}
+
+input[type='submit']:hover,
+input[type='button']:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 30px rgba(124, 58, 237, 0.28);
+}
+
+label {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p.success,
+p.error {
+    margin: 1rem 0 0;
+    padding: 0.95rem 1rem;
+    border-radius: 16px;
+    font-size: 0.95rem;
+}
+
+p.success {
+    background: rgba(34, 197, 94, 0.14);
+    color: #dcfce7;
+}
+
+p.error {
+    background: rgba(239, 68, 68, 0.14);
+    color: #fecaca;
+}
+
+@media (max-width: 420px) {
+    body {
+        padding: 1rem;
+    }
+
+    form {
+        padding: 1.5rem;
+        border-radius: 24px;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    input[type='submit'] {
+        font-size: 0.98rem;
+        padding: 0.95rem 1rem;
+    }
+}
+
+.form-container {
+    width: min(100%, 460px);
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.logo-text {
+    margin: 0;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    letter-spacing: 0.35rem;
+    text-transform: uppercase;
+    color: #f8fafc;
+    text-shadow: 0 22px 50px rgba(124, 58, 237, 0.28);
+}
+
+.logo-subtitle {
+    margin: 0.9rem auto 0;
+    max-width: 30rem;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+}
+
+.page-shell {
+    width: min(100%, 860px);
+    margin: 0 auto;
+    padding-top: 1.5rem;
+}
+
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.page-header h3 {
+    margin: 0;
+    font-size: clamp(1.9rem, 2.5vw, 2.8rem);
+}
+
+.section-card {
+    background: rgba(18, 24, 38, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.section-card h4 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+    color: #f8fafc;
+}
+
+.button-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1.15rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(96, 165, 250, 0.95));
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    margin-top: 10px;
+}
+
+.button-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 30px rgba(124, 58, 237, 0.24);
+}
+
+.workout-card {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 24px;
+    color: var(--text);
+    padding: 1rem 1.1rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    margin-bottom: 1rem;
+}
+
+.workout-card:hover {
+    transform: translateY(-1px);
+    border-color: rgba(124, 58, 237, 0.35);
+    background: rgba(31, 41, 55, 0.98);
+}
+
+.workout-card h5 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.workout-card i {
+    color: var(--accent);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+#workout-details-container {
+    width: 100%;
+    margin: 1.5rem auto 0;
+    background: rgba(18, 24, 38, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 28px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+#workout-details-container h4 {
+    margin-top: 0;
+    color: #f8fafc;
+}
+
+@media (max-width: 720px) {
+    body {
+        padding: 1rem;
+    }
+
+    form,
+    .page-shell,
+    .form-container {
+        width: 100%;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .workout-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 420px) {
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    input[type='submit'] {
+        font-size: 0.98rem;
+        padding: 0.95rem 1rem;
+    }
+}
+
+.exercise-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.exercise-row input {
+    min-width: 0;
+}
+
+.logo {
+    text-align: center;
+}
+
+
+.logo-subtitle {
+    margin-top: 0.8rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.logo-text {
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    color: #f8fafc;
+    text-shadow: 0 22px 50px rgba(124, 58, 237, 0.28);
+}
