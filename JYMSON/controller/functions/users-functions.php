@@ -22,19 +22,34 @@
         return $encoded_data;
     }
 
-    //founding user code
-    function found_user_code(User $user){
+    //getting user name by email
+    function get_user_name_by_email($email){
         $old_records = get_users_old_records();
-        
         foreach($old_records as $record){
-            if($record->user_name == $user->getUser_name() &&
-            $record->user_email == $user->getUser_email() &&
-            $record->user_password == $user->getUser_password()){
-                $user->user_code = $record->user_code;
-                return "success";   
+            if(!isset($record->user_email) || 
+            !isset($record->user_name)){
+                continue;
+            }
+            if($record->user_email == $email){
+                return $record->user_name;
             }
         }
-        return "error";
+        return null;
+    }
+
+    //getting code user by email
+    function get_code_user_by_email($email){
+        $old_records = get_users_old_records();
+        foreach($old_records as $record){
+            if(!isset($record->user_email) || 
+            !isset($record->user_code)){
+                continue;
+            }
+            if($record->user_email == $email){
+                return $record->user_code;
+            }
+            return null;
+        }
     }
 
     //search user
@@ -42,21 +57,28 @@
     
         $old_records = get_users_old_records();
 
-        if($user->getUser_code() === ""){
-            if(found_user_code($user) === "error"){
-                return "error";
+        if($_SESSION["current_process"] === "Login"){
+            foreach($old_records as $record){
+                if(!isset($record->user_email) ||
+                !isset($record->user_password)){
+                    continue;
+                }
+                if($record->user_email == $user->getUser_email() &&
+                $record->user_password == $user->getUser_password()){
+                    return "success";
+                }
             }
         }
-        foreach($old_records as $record){
-            if(!isset($record->user_code, $record->user_email)){
-                continue;
+        if($_SESSION["current_process"] === "Signup"){
+             foreach($old_records as $record){
+                if(!isset($record->user_email)){
+                    continue;
+                }
+                if($record->user_email === $user->getUser_email()){
+                    return "success";
+                }
             }
-            if($record->user_code === $user->getUser_code() 
-                && $record->user_email === $user->getUser_email()){
-                return "success";
-           }
         }
-        
         return "error";
     }
 

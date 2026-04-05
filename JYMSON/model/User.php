@@ -48,6 +48,7 @@
             return $this->user_code;
         }
 
+        //JSON structure
         public function jsonSerialize(): mixed{
             return [
                 'user_name' => $this->user_name,

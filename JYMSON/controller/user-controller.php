@@ -1,4 +1,5 @@
 <?php 
+    require_once __DIR__ . '/../model/User.php';
     require_once __DIR__ . '/functions/users-functions.php';
 
     function controller_save_user(User $new_user){
@@ -17,6 +18,14 @@
         else{
             return "error";
         }
+    }
+
+    function controller_get_name_user_by_email(){
+        return get_user_name_by_email($_SESSION["user_email"] ?? '');
+    }
+
+    function controller_get_code_user_by_email(){
+        return get_code_user_by_email($_SESSION["user_email"] ?? '');
     }
 
 ?>

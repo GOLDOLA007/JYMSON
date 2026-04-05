@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once __DIR__ . '/../controller/user-controller.php';
     require_once __DIR__. '/../controller/functions/general-functions.php';
     require_once __DIR__ . '/../model/User.php';
@@ -6,6 +7,8 @@
     $response = null;
 
     if(isset($_POST['submit'])){
+        $_SESSION["current_process"] = "Login";
+        $_SESSION["user_email"] = $_POST['email'];
         $user = new User(
             "",
             $_POST['email'],

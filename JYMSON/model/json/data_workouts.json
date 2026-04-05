@@ -1,0 +1,15 @@
+[
+    {
+        "workout_name": "teste",
+        "workout_code": "69d1cbb4a2919",
+        "workout_exercises": [
+            {
+                "name": "1",
+                "weight": "1",
+                "reps": "1",
+                "sets": "1"
+            }
+        ],
+        "user_code": "69d1c93e35966"
+    }
+]

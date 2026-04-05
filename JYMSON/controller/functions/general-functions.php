@@ -10,8 +10,8 @@
         $file = __DIR__ . "/../../model/json/data_users.json";
         return $file;
     }
-    function get_data_workout_JSON_path(){
-        $file = __DIR__ . "/../../model/json/workout_users.json";
+    function get_data_workouts_JSON_path(){
+        $file = __DIR__ . "/../../model/json/data_workouts.json";
         return $file;
     }
 

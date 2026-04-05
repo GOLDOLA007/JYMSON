@@ -1,10 +1,12 @@
 <?php
+    session_start();
     require_once __DIR__ . '/../controller/user-controller.php';
     require_once __DIR__. '/../controller/functions/general-functions.php';
 
     $response = null;
 
     if(isset($_POST['submit'])){
+        $_SESSION["current_process"] = "Signup";
         $user = new User(
             $_POST['name'],
             $_POST['email'],
