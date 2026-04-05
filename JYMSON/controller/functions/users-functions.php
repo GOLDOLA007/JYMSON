@@ -48,8 +48,8 @@
             if($record->user_email == $email){
                 return $record->user_code;
             }
-            return null;
         }
+        return null;
     }
 
     //search user
